@@ -4,22 +4,22 @@ declare(strict_types = 1);
 /**
  * @name EconomyApiAddon
  * @version 1.0.0
- * @main JackMD\ScoreHud\Addons\EconomyApiAddon
- * @depend EconomyAPI
+ * @main JackMD\ScoreHud\Addons\MultiEconomyApiAddon
+ * @depend MultiEconomy
  */
 namespace JackMD\ScoreHud\Addons
 {
 	use JackMD\ScoreHud\addon\AddonBase;
-	use onebone\economyapi\EconomyAPI;
+	use twisted\multieconomy\MultiEconomy;
 	use pocketmine\Player;
 
-	class EconomyApiAddon extends AddonBase{
+	class MultiEconomyApiAddon extends AddonBase{
 
 		/** @var EconomyAPI */
-		private $economyAPI;
+		private $multieco;
 
 		public function onEnable(): void{
-			$this->economyAPI = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
+			$this->multieco = $this->getServer()->getPluginManager()->getPlugin("MultiEconomy");
 		}
 
 		/**
@@ -28,7 +28,7 @@ namespace JackMD\ScoreHud\Addons
 		 */
 		public function getProcessedTags(Player $player): array{
 			return [
-				"{money}" => $this->economyAPI->myMoney($player)
+				"{coins}" => $this->multieco->getCurrency("Coins")->getBalance($player);
 			];
 		}
 	}
