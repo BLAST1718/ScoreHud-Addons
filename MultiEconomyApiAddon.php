@@ -28,7 +28,7 @@ namespace JackMD\ScoreHud\Addons
 		 */
 		public function getProcessedTags(Player $player): array{
 			return [
-				"{coins}" => $this->multieco->getCurrency("Coins")->getBalance($player);
+				"{coins}" => $this->multieco->getCurrency("Coins")->getBalance($player->getName())
 			];
 		}
 	}
